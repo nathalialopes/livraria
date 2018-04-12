@@ -1,23 +1,21 @@
 
 <%@page import="java.math.BigDecimal"%>
-<%@page import="modelo.Autor"%>
-<%@page import="dao.AutorDAO"%>
+<%@page import="modelo.Editora"%>
+<%@page import="dao.EditoraDAO"%>
 <%@include file="../cabecalho.jsp" %>
 <%
 String msg ="";
 String classe = "";
     
-    AutorDAO dao = new AutorDAO();
-    Autor obj = new Autor();
+    EditoraDAO dao = new EditoraDAO();
+    Editora obj = new Editora();
     //verifica se é postm ou seja, quer alterar
     if(request.getMethod().equals("POST")){
         
         //popular com oq ele digitou no form
-        obj.setId(Integer.parseInt(request.getParameter("txtId")));
+        obj.setCnpj(request.getParameter("txtCnpj"));
         obj.setNome(request.getParameter("txtNome"));
-        obj.setNacionalidade(request.getParameter("txtNacionalidade"));
-        obj.setSexo(request.getParameter("txtSexo").charAt(0));
-        obj.setFoto(request.getParameter("txtFoto"));
+        obj.setLogo(request.getParameter("txtFoto"));
                 
         Boolean resultado = dao.alterar(obj);
         
@@ -37,7 +35,7 @@ String classe = "";
             return;
         }
         
-        dao = new AutorDAO();
+        dao = new EditoraDAO();
         obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("id")));
         
         if(obj == null){
@@ -66,7 +64,7 @@ String classe = "";
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Autor
+            Editora
         </div>
         <div class="panel-body">
 
@@ -78,8 +76,8 @@ String classe = "";
                 <div class="col-lg-6">
 
                     <div class="form-group">
-                        <label>Id</label>
-                        <input class="form-control" type="text" name="txtId" readonly value="<%=obj.getId()%>"/>
+                        <label>Cnpj</label>
+                        <input class="form-control" type="text" name="txtCnpj" readonly value="<%=obj.getCnpj()%>"/>
                     </div>
                     
                     <div class="form-group">
@@ -88,20 +86,7 @@ String classe = "";
                     </div>
                     
                     <div class="form-group">
-                        <label>Nacionalidade</label>
-                        <input class="form-control" type="text" name="txtNome" required value="<%=obj.getNome() %>" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Sexo</label>
-                    </div>
-                    <select name ="txtSexo">
-                        <option valeu ='M'> Masculino </option>
-                        <option valeu ='F'> Feminino </option>
-                    </select>
-                    
-                    <div class="form-group">
-                        <label>Foto</label>
+                        <label>Logo</label>
                         <input type="file"  name="Foto" />
                     </div>
                     

@@ -1,20 +1,19 @@
 <%@page import="java.math.BigDecimal"%>
-<%@page import="dao.AutorDAO"%>
-<%@page import="modelo.Autor"%>
+<%@page import="dao.EditoraDAO"%>
+<%@page import="modelo.Editora"%>
 <%@page import="java.util.List"%>
 
 <%@include file="../cabecalho.jsp" %>
 <%
     String msg = "";
     String classe = "";
-    Autor obj = new Autor();
-    AutorDAO dao = new AutorDAO();
+    Editora obj = new Editora();
+    EditoraDAO dao = new EditoraDAO();
     
-    if (request.getParameter("txtNome") != null && request.getParameter("txtNacionalidade") != null
-            && request.getParameter("txtSexo") != null) {
+    if (request.getParameter("txtNome") != null&& request.getParameter("txtCnpj") != null) {
         obj.setNome(request.getParameter("txtNome"));
-        obj.setNacionalidade(request.getParameter("txtNacionalidade"));
-        obj.setSexo(request.getParameter("txtSexo").charAt(0));
+        obj.setCnpj(request.getParameter("txtCnpj"));
+        obj.setLogo(request.getParameter("txtFoto"));
         
         Boolean resultado = dao.incluir(obj);
         if (resultado) {
@@ -31,7 +30,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Sistema de Autores
+            Sistema de Comércio Eletrônico
             <small>Admin</small>
         </h1>
         <ol class="breadcrumb">
@@ -48,14 +47,15 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Autores
+            Editoras
         </div>
         <div class="panel-body">
 
             <div class="alert <%=classe%>">
                 <%=msg%>
             </div>
-            <form action="../UploadWS" method="post" enctype="multipart/form-data">
+                <form action="../UploadWS" method="post" enctype="multipart/form-data">
+
 
                 <div class="col-lg-6">
 
@@ -63,21 +63,15 @@
                         <label>Nome</label>
                         <input class="form-control" type="text"  name="txtNome"  required />
                     </div>
-                    <div class="form-group">
-                        <label>Nacionalidade</label>
-                        <input class="form-control" type="text"  name="txtNacionalidade"  required />
-                    </div>
-                    <div class="form-group">
-                        <label>Sexo</label>
-                    </div>
-                    <select name ="txtSexo">
-                        <option valeu ='M'> Masculino </option>
-                        <option valeu ='F'> Feminino </option>
-                    </select>
                     
                     <div class="form-group">
-                        <label>Foto</label>
-                        <input type="file"  name="Foto" />
+                        <label>Cnpj</label>
+                        <input class="form-control" type="text"  name="txtCnpj"  required />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Logo</label>
+                        <input class="form-control" type="text"  name="txtFoto"  required />
                     </div>
                     
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
