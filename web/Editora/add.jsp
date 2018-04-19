@@ -30,7 +30,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Sistema de Comércio Eletrônico
+            Sistema de Editoras
             <small>Admin</small>
         </h1>
         <ol class="breadcrumb">
@@ -71,9 +71,9 @@
                     
                     <div class="form-group">
                         <label>Logo</label>
-                        <input class="form-control" type="text"  name="txtFoto"  required />
+                        <input type="file"  name="Foto" />
                     </div>
-                    
+                   
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
 
             </form>

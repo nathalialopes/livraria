@@ -15,7 +15,7 @@
    
     //verifico se é excluir
         if(request.getParameter("codigo") != null){
-            Editora obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            Editora obj = dao.buscarPorChavePrimaria(request.getParameter("codigo"));
             if(obj != null){
                 dao.excluir(obj);
             }
@@ -87,6 +87,7 @@
                     <tr>
                         <td><%=item.getCnpj()%></td>
                         <td><%=item.getNome() %></td>
+                        <td><img src="../arquivos/<%=item.getLogo()%>" width="40px" heigth="40px"/></td>
                             <td><a href="upd.jsp?codigo=<%=item.getCnpj()%>" class="btn  btn-primary btn-sm">Alterar</a>
                             <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getCnpj()%>">Excluir</button>  
                         </td>

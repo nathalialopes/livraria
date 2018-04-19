@@ -89,7 +89,7 @@ String classe = "";
                     
                     <div class="form-group">
                         <label>Nacionalidade</label>
-                        <input class="form-control" type="text" name="txtNome" required value="<%=obj.getNome() %>" />
+                        <input class="form-control" type="text" name="txtNacionalidade" required value="<%=obj.getNacionalidade() %>" />
                     </div>
                     
                     <div class="form-group">

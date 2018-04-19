@@ -75,11 +75,7 @@
                         <th>Nome</th>
                         <th>Nacionalidade</th>
                         <th>Sexo</th>
-                        <th>Foto</th>
-                        
-                        
-                        
-                        
+                        <th>Foto</th>           
                     </tr>
                 </thead>
                 <tbody>
@@ -89,7 +85,10 @@
                     <tr>
                         <td><%=item.getId() %></td>
                         <td><%=item.getNome() %></td>
-                            <td><a href="upd.jsp?codigo=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
+                        <td><%=item.getNacionalidade()%></td>
+                        <td><%=item.getSexo()%></td>
+                        <td><img src="../arquivos/<%=item.getFoto()%>" width="40px" height="40px"/></td>
+                            <td><a href="upd.jsp?id=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
                             <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getId()%>">Excluir</button>  
                         </td>
                     </tr>
