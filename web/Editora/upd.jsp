@@ -36,7 +36,7 @@ String classe = "";
         }
         
         dao = new EditoraDAO();
-        obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("id")));
+        obj = dao.buscarPorChavePrimaria(request.getParameter("id"));
         
         if(obj == null){
             response.sendRedirect("index.jsp");

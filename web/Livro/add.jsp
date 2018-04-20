@@ -1,17 +1,28 @@
-<%@page import="java.math.BigDecimal"%>
-<%@page import="dao.CategoriaDAO"%>
+<%@page import="util.StormData"%>
 <%@page import="modelo.Categoria"%>
-<%@page import="java.util.List"%>
-
-<%@include file="../cabecalho.jsp" %>
+<%@page import="dao.LivroDAO"%>
+<%@page import="modelo.Livro"%>
 <%
     String msg = "";
     String classe = "";
-    Categoria obj = new Categoria();
-    CategoriaDAO dao = new CategoriaDAO();
+    Livro obj = new Livro();
+    LivroDAO dao = new LivroDAO();
+    Categoria c = new Categoria();
     
-    if (request.getParameter("txtNome") != null) {
+    if (request.getParameter("txtNome") != null && request.getParameter("txtCnpj") != null 
+            && request.getParameter("txtPreco") != null && request.getParameter("txtDataPublicacao") !=null
+            && request.getParameter("Categoria") !=null && request.getParameter("Editora") !=null) {
         obj.setNome(request.getParameter("txtNome"));
+        c.setNome(request.getParameter("txtCategoria"));
+        obj.setCategoria(c);
+        obj.setDatapublicacao(StormData.formata(request.getParameter("txtData)));
+        obj.setPreco(request.getParameter("txtCnpj"));
+        obj.setDatapublicacao(request.getParameter("txtFoto"));
+        obj.setEditora(editora);
+        obj.setImagem1(imagem1);
+        obj.setImagem2(imagem2);
+        obj.setImagem3(imagem3);
+        obj.setSinopse(sinopse);
         
         Boolean resultado = dao.incluir(obj);
         if (resultado) {
@@ -28,7 +39,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Sistema de Categorias
+            Sistema de Livros
             <small>Admin</small>
         </h1>
         <ol class="breadcrumb">
@@ -45,14 +56,15 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Categorias
+            Livros
         </div>
         <div class="panel-body">
 
             <div class="alert <%=classe%>">
                 <%=msg%>
             </div>
-            <form action="#" method="post">
+                <form action="../UploadWS" method="post" enctype="multipart/form-data">
+
 
                 <div class="col-lg-6">
 
@@ -61,6 +73,16 @@
                         <input class="form-control" type="text"  name="txtNome"  required />
                     </div>
                     
+                    <div class="form-group">
+                        <label>Cnpj</label>
+                        <input class="form-control" type="text"  name="txtCnpj"  required />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Logo</label>
+                        <input type="file"  name="Foto" />
+                    </div>
+                   
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
 
             </form>

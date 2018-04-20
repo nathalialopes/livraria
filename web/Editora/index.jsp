@@ -88,7 +88,7 @@
                         <td><%=item.getCnpj()%></td>
                         <td><%=item.getNome() %></td>
                         <td><img src="../arquivos/<%=item.getLogo()%>" width="40px" heigth="40px"/></td>
-                            <td><a href="upd.jsp?codigo=<%=item.getCnpj()%>" class="btn  btn-primary btn-sm">Alterar</a>
+                            <td><a href="upd.jsp?id=<%=item.getCnpj()%>" class="btn  btn-primary btn-sm">Alterar</a>
                             <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getCnpj()%>">Excluir</button>  
                         </td>
                     </tr>
