@@ -1,3 +1,9 @@
+<%@page import="modelo.Editora"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="modelo.Autor"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Date"%>
+<%@page import="dao.AutorDAO"%>
 <%@page import="util.StormData"%>
 <%@page import="modelo.Categoria"%>
 <%@page import="dao.LivroDAO"%>
@@ -5,25 +11,35 @@
 <%
     String msg = "";
     String classe = "";
+    
+    if(request.getMethod().equals("POST")){
+        String[] autoresid = request.getParameter("autores").split(";");
+        Livro l = new Livro();
+        l.setNome("As maravilhas da Programação");
+        l.setDatapublicacao(new Date());
+        l.setPreco(13.12f);
+    
+        List<Autor>listaautores = new ArrayList<>();
+            for(String id : autoresid){
+            Integer idinteger = Integer.parseInt(id);
+            listaautores.add(new Autor());
+    }
+            
+        l.setAutorList(listaautores);
+        LivroDAO obj = new LivroDAO();
+        dao.incluir(l);
+        
+    }
     Livro obj = new Livro();
     LivroDAO dao = new LivroDAO();
-    Categoria c = new Categoria();
+    Categoria cat = new Categoria();
+    Editora edi = new Editora();
+    Autor aut = new Autor();
+    Categoria
     
-    if (request.getParameter("txtNome") != null && request.getParameter("txtCnpj") != null 
-            && request.getParameter("txtPreco") != null && request.getParameter("txtDataPublicacao") !=null
-            && request.getParameter("Categoria") !=null && request.getParameter("Editora") !=null) {
-        obj.setNome(request.getParameter("txtNome"));
-        c.setNome(request.getParameter("txtCategoria"));
-        obj.setCategoria(c);
-        obj.setDatapublicacao(StormData.formata(request.getParameter("txtData)));
-        obj.setPreco(request.getParameter("txtCnpj"));
-        obj.setDatapublicacao(request.getParameter("txtFoto"));
-        obj.setEditora(editora);
-        obj.setImagem1(imagem1);
-        obj.setImagem2(imagem2);
-        obj.setImagem3(imagem3);
-        obj.setSinopse(sinopse);
-        
+    
+    
+    
         Boolean resultado = dao.incluir(obj);
         if (resultado) {
             msg = "Registro cadastrado com sucesso";
@@ -69,8 +85,13 @@
                 <div class="col-lg-6">
 
                     <div class="form-group">
-                        <label>Nome</label>
-                        <input class="form-control" type="text"  name="txtNome"  required />
+                        <label>Autores</label>
+                        <select name ="autores" multiple>
+                            <%for(Autor a:autores){%>
+                            <option value ="<%=a.getId()%>"><%=a.getNome()%>
+                            </option>
+                            <%}%>
+                        </select>
                     </div>
                     
                     <div class="form-group">
