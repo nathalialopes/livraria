@@ -1,3 +1,6 @@
+
+<%@page import="dao.EditoraDAO"%>
+<%@page import="dao.CategoriaDAO"%>
 <%@page import="modelo.Editora"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Autor"%>
@@ -8,39 +11,53 @@
 <%@page import="modelo.Categoria"%>
 <%@page import="dao.LivroDAO"%>
 <%@page import="modelo.Livro"%>
+
+<%@include file="../cabecalho.jsp"%>
 <%
     String msg = "";
     String classe = "";
     
-    if(request.getMethod().equals("POST")){
-        String[] autoresid = request.getParameter("autores").split(";");
-        Livro l = new Livro();
-        l.setNome("As maravilhas da Programação");
-        l.setDatapublicacao(new Date());
-        l.setPreco(13.12f);
-    
-        List<Autor>listaautores = new ArrayList<>();
-            for(String id : autoresid){
-            Integer idinteger = Integer.parseInt(id);
-            listaautores.add(new Autor());
-    }
-            
-        l.setAutorList(listaautores);
-        LivroDAO obj = new LivroDAO();
-        dao.incluir(l);
-        
-    }
     Livro obj = new Livro();
     LivroDAO dao = new LivroDAO();
     Categoria cat = new Categoria();
     Editora edi = new Editora();
-    Autor aut = new Autor();
-    Categoria
     
+    CategoriaDAO cdao = new CategoriaDAO();
+    List<Categoria> clista = cdao.listar();
+    EditoraDAO edao = new EditoraDAO();
+    List<Editora> elista = edao.listar();
+    AutorDAO adao = new AutorDAO();
+    List<Autor> alista = adao.listar();
     
+    if (request.getParameter("txtNome") != null && request.getParameter("txtPreco") != null && request.getParameter("txtData") != null && request.getParameter("txtEditora") != null){
+        obj.setNome(request.getParameter("txtNome"));
+        //cat.setNome(request.getParameter("txtCategoria"));
+        //edi.setNome("txtEditora");
+        
+        cat.setId(Integer.parseInt(request.getParameter("txtCategoria")));
+        obj.setCategoria(cat);
+        obj.setImagem1(request.getParameter("txtImagem1"));
+        obj.setImagem2(request.getParameter("txtImagem2"));
+        obj.setImagem3(request.getParameter("txtImagem3"));
+        obj.setSinopse(request.getParameter("txtSinopse"));
+        obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
+        edi.setCnpj(request.getParameter("txtCnpj"));
     
-    
+        obj.setEditora(edi);
+        obj.setDatapublicacao(StormData.formata(request.getParameter("txtData")));
+        
+        String[] autoresid = request.getParameter("autores").split(";");
+        
+        List<Autor>listaautores = new ArrayList<>();
+        for(String id : autoresid){
+          Integer idinteger = Integer.parseInt(id);
+          listaautores.add(new Autor(idinteger));
+        
+        }
+        obj.setAutorList(listaautores);
+        
         Boolean resultado = dao.incluir(obj);
+        dao.fecharConexao();
         if (resultado) {
             msg = "Registro cadastrado com sucesso";
             classe = "alert-success";
@@ -85,24 +102,54 @@
                 <div class="col-lg-6">
 
                     <div class="form-group">
+                        <label>Nome</label>
+                        <input class="form-control" type="text" name="txtNome" required/>
+                        <label>Sinopse</label>
+                        <input class="form-control" type="text" name="txtSinopse" required/>
+                        <label>Foto 1</label>
+                        <input type="file" name="txtImagem1" required/>
+                        <label>Foto 2</label>
+                        <input type="file" name="txtImagem2" required/>
+                        <label>Foto 3</label>
+                        <input type="file" name="txtImagem3" required/>
+                        <label>Data de Publicação</label>
+                        <input class="form-control" type="text" name="txtData" required/>
+                        <label>Preço</label>
+                        <input class="form-control" type="text" name="txtPreco" required/>
                         <label>Autores</label>
-                        <select name ="autores" multiple>
-                            <%for(Autor a:autores){%>
-                            <option value ="<%=a.getId()%>"><%=a.getNome()%>
+                        <select name="autores" multiple>
+                            <%
+                                for(Autor a : alista){
+                            %>
+                            <option value="<%=a.getId()%>">
+                                <%=a.getNome()%>
+                            </option>
+                            <%}%>
+                        </select> 
+                        <label>Editora</label>
+                        <select name="txtEditora">
+                            <option value=""> Selecione </option>
+                            <%
+                                for(Editora e : elista) {
+                            %>
+                            <option value="<%=e.getCnpj()%>">
+                                <%=e.getNome()%>
                             </option>
                             <%}%>
                         </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Cnpj</label>
-                        <input class="form-control" type="text"  name="txtCnpj"  required />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Logo</label>
-                        <input type="file"  name="Foto" />
-                    </div>
+                        <label> Categoria </label>
+                        <select name="txtCategoria">
+                            <option value=""> Selecione </option>
+                            <%
+                                for (Categoria c : clista) {
+                            %>
+                            <option value="<%=c.getId()%>">
+                                <%=c.getNome()%>
+                            </option>
+                            <%}%>
+                        </select>
+                            
+                        </div>
                    
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
 
