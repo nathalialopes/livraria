@@ -15,7 +15,13 @@ String classe = "";
         //popular com oq ele digitou no form
         obj.setCnpj(request.getParameter("txtCnpj"));
         obj.setNome(request.getParameter("txtNome"));
-        obj.setLogo(request.getParameter("txtFoto"));
+        
+        if(request.getParameter("txtLogo")!=null){
+            obj.setLogo(request.getParameter("txtLogo"));
+        }
+        else{
+            obj.setLogo(request.getParameter("txtLogoVelho"));
+        }
                 
         Boolean resultado = dao.alterar(obj);
         
@@ -87,7 +93,9 @@ String classe = "";
                     
                     <div class="form-group">
                         <label>Logo</label>
-                        <input type="file"  name="Foto" />
+                        <input class="form-control" type="file" name="txtLogo" id="foto" accept="image/*" />
+                        <img src="../arquivos/<%=obj.getLogo()%>" id="foto"/>
+                        <input type="hidden" name="txtLogoVelho" valeu="<%=obj.getLogo()%>"/>
                     </div>
                     
 
@@ -102,3 +110,20 @@ String classe = "";
 </div>
 <!-- /.row -->
 <%@include file="../rodape.jsp" %>
+<script>
+    function readURL(input,destino) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#'+destino).attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#arquivo1").change(function(){
+        readURL(this,"img1");
+    });
+</script>

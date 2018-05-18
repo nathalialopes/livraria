@@ -79,16 +79,16 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="../autor/index.jsp"><i class="fa fa-fw fa-edit"></i> Autores</a>
+                        <a href="../Autor/index.jsp"><i class="fa fa-fw fa-edit"></i> Autores</a>
                     </li>
                     <li>
-                        <a href="../livro/index.jsp"><i class="fa fa-fw fa-bar-chart-o"></i> Livros</a>
+                        <a href="../Livro/index.jsp"><i class="fa fa-fw fa-bar-chart-o"></i> Livros</a>
                     </li>
                     <li>
-                        <a href="../editora/index.jsp"><i class="fa fa-fw fa-bar-chart-o"></i> Editoras</a>
+                        <a href="../Editora/index.jsp"><i class="fa fa-fw fa-bar-chart-o"></i> Editoras</a>
                     </li>
                     <li>
-                        <a href="../categoria/index.jsp"><i class="fa fa-fw fa-bar-chart-o"></i> Categorias</a>
+                        <a href="../Categoria/index.jsp"><i class="fa fa-fw fa-bar-chart-o"></i> Categorias</a>
                     </li>
                     
                 </ul>

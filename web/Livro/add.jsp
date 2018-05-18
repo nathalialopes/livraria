@@ -31,18 +31,16 @@
     
     if (request.getParameter("txtNome") != null && request.getParameter("txtPreco") != null && request.getParameter("txtData") != null && request.getParameter("txtEditora") != null){
         obj.setNome(request.getParameter("txtNome"));
-        //cat.setNome(request.getParameter("txtCategoria"));
-        //edi.setNome("txtEditora");
-        
         cat.setId(Integer.parseInt(request.getParameter("txtCategoria")));
+        edi.setCnpj(request.getParameter("txtEditora"));
+                
         obj.setCategoria(cat);
         obj.setImagem1(request.getParameter("txtImagem1"));
         obj.setImagem2(request.getParameter("txtImagem2"));
         obj.setImagem3(request.getParameter("txtImagem3"));
         obj.setSinopse(request.getParameter("txtSinopse"));
         obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
-        edi.setCnpj(request.getParameter("txtCnpj"));
-    
+                    
         obj.setEditora(edi);
         obj.setDatapublicacao(StormData.formata(request.getParameter("txtData")));
         

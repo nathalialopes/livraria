@@ -17,7 +17,13 @@ String classe = "";
         obj.setNome(request.getParameter("txtNome"));
         obj.setNacionalidade(request.getParameter("txtNacionalidade"));
         obj.setSexo(request.getParameter("txtSexo").charAt(0));
-        obj.setFoto(request.getParameter("txtFoto"));
+        
+        if(request.getParameter("txtFoto")!=null){
+            obj.setFoto(request.getParameter("txtFoto"));
+           }
+        else{
+            obj.setFoto(request.getParameter("txtFotoVelha"));
+        }
                 
         Boolean resultado = dao.alterar(obj);
         
@@ -102,7 +108,9 @@ String classe = "";
                     
                     <div class="form-group">
                         <label>Foto</label>
-                        <input type="file"  name="Foto" />
+                        <input class="form-control" type="file" name="txtFoto" id="foto" accept="image/*" valeu="<%=obj.getFoto()%>"/>
+                        <img src="../arquivos/<%=obj.getFoto()%>" id="foto"/>
+                        <input type="hidden" name="txtFotoVelha" valeu="<%=obj.getFoto()%>"/>
                     </div>
                     
 
@@ -117,3 +125,20 @@ String classe = "";
 </div>
 <!-- /.row -->
 <%@include file="../rodape.jsp" %>
+<script>
+    function readURL(input,destino) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#'+destino).attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#arquivo1").change(function(){
+        readURL(this,"img1");
+    });
+</script>

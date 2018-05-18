@@ -1,3 +1,4 @@
+<%@page import="util.StormData"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Livro"%>
 <%@page import="dao.LivroDAO"%>
@@ -72,8 +73,7 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Nome</th>
-                        <th>Autores</th>
+                        <th>Nome</th>                        
                         <th>Preço</th>
                         <th>Data de Publicação</th>
                         <th>Categoria</th>
@@ -92,19 +92,17 @@
                     <tr>
                         <td><%=item.getId() %></td>
                         <td><%=item.getNome() %></td>
-                        <td><%=item.getAutorList()%></td>
                         <td><%=item.getPreco()%></td>
-                        <td><%=item.getDatapublicacao()%></td>
+                        <td><%=StormData.formata(item.getDatapublicacao())%></td>
                         <td><%=item.getCategoria()%></td>
                         <td><%=item.getEditora()%></td>
                         <td><%=item.getSinopse()%></td>
                         <td><img src="../arquivos/<%=item.getImagem1()%>" width="70px" height="60px"/></td>
                         <td><img src="../arquivos/<%=item.getImagem2()%>" width="70px" height="60px"/></td>
                         <td><img src="../arquivos/<%=item.getImagem3()%>" width="70px" height="60px"/></td>
-                        
-                        
-                            <td><a href="upd.jsp?id=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
-                            <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getId()%>">Excluir</button>  
+                        <td><a href="upd.jsp?id=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
+                        <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" 
+                                onclick="codigo=<%=item.getId()%>">Excluir</button>  
                         </td>
                     </tr>
                     <% } %>
