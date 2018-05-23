@@ -149,23 +149,23 @@ String classe = "";
                         
                     <div class="form-group">
                         <label>Foto</label>
-                        <input type="file" name="txtImagem1" valeu="<%=obj.getImagem1()%>" id="arquivo1"  accept="image/*" />
+                        <input type="file" name="txtImagem1" value="<%=obj.getImagem1()%>" id="arquivo1"  accept="image/*" />
                         <img src="../arquivos/<%=obj.getImagem1()%>" id="img1"/>
-                        <input type="hidden" name="txtFotoVelha1" valeu="<%=obj.getImagem1()%>"/>
+                        <input type="hidden" name="txtFotoVelha1" value="<%=obj.getImagem1()%>"/>
                     </div>
 
                     <div class="form-group">
                         <label>Foto 2</label>
-                        <input type="file" name="txtImagem2" valeu="<%=obj.getImagem2()%>" id="arquivo1"  accept="image/*" />
+                        <input type="file" name="txtImagem2" value="<%=obj.getImagem2()%>" id="arquivo1"  accept="image/*" />
                         <img src="../arquivos/<%=obj.getImagem2()%>" id="img1"/>
-                        <input type="hidden" name="txtFotoVelha2" valeu="<%=obj.getImagem2()%>"/>
+                        <input type="hidden" name="txtFotoVelha2" value="<%=obj.getImagem2()%>"/>
                     </div>
 
                     <div class="form-group">
                         <label>Foto 3</label>
-                        <input type="file" name="txtImagem3" valeu="<%=obj.getImagem3()%>" id="arquivo1"  accept="image/*" />
+                        <input type="file" name="txtImagem3" value="<%=obj.getImagem3()%>" id="arquivo1"  accept="image/*" />
                         <img src="../arquivos/<%=obj.getImagem3()%>" id="img1"/>
-                        <input type="hidden" name="txtFotoVelha3" valeu="<%=obj.getImagem3()%>"/>
+                        <input type="hidden" name="txtFotoVelha3" value="<%=obj.getImagem3()%>"/>
                     </div>    
                         
                     <div class="form-group">

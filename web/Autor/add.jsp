@@ -73,8 +73,8 @@
                         <label>Sexo</label>
                     </div>
                     <select name ="txtSexo">
-                        <option valeu ='M'> Masculino </option>
-                        <option valeu ='F'> Feminino </option>
+                        <option value ='M'> Masculino </option>
+                        <option value ='F'> Feminino </option>
                     </select>
                     
                     <div class="form-group">

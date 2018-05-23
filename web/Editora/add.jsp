@@ -72,7 +72,7 @@
                     
                     <div class="form-group">
                         <label>Logo</label>
-                        <input type="file"  name="Foto" />
+                        <input type="file"  name="txtFoto" />
                     </div>
                    
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>

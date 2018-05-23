@@ -45,6 +45,14 @@ String classe = "";
         
         dao = new AutorDAO();
         obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("id")));
+        if(obj.getSexo().equals('M'))
+        {
+            m = "selected";
+        }
+        else
+        {
+            f = "selected";
+        }
         
         if(obj == null){
             response.sendRedirect("index.jsp");
@@ -102,15 +110,15 @@ String classe = "";
                         <label>Sexo</label>
                     </div>
                     <select name ="txtSexo">
-                        <option valeu ='M'> Masculino </option>
-                        <option valeu ='F'> Feminino </option>
+                        <option value ='M'> Masculino </option>
+                        <option value ='F'> Feminino </option>
                     </select>
                     
                     <div class="form-group">
                         <label>Foto</label>
-                        <input class="form-control" type="file" name="txtFoto" id="foto" accept="image/*" valeu="<%=obj.getFoto()%>"/>
+                        <input class="form-control" type="file" name="txtFoto" id="foto" accept="image/*" value="<%=obj.getFoto()%>"/>
                         <img src="../arquivos/<%=obj.getFoto()%>" id="foto"/>
-                        <input type="hidden" name="txtFotoVelha" valeu="<%=obj.getFoto()%>"/>
+                        <input type="hidden" name="txtFotoVelha" value="<%=obj.getFoto()%>"/>
                     </div>
                     
 
