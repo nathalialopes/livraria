@@ -92,7 +92,8 @@
                                                                                               
                                                                         {
                                                                         %>
-                                                                            <li><a href="index.jsp"><%=item.getNome()%></a></li>
+                                                                            <li><a href="index.jsp?categoriaid=><%=item.getId()%>">
+                                                                                <%=item.getNome()%></a></li>
 									<% }%>	
 									</ul>
                                                                         
@@ -105,7 +106,8 @@
                                                                                               
                                                                         {
                                                                         %>
-										<li><a href="index.jsp"><%=item.getNome()%></a></li>
+										<li><a href="index.jsp?autorid"><%=item.getId()%>">
+                                                                                    <%=item.getNome()%></a></li>
 										<% }%>	
 									</ul>
 								<li><a href="blog.html">Blog</a></li>
