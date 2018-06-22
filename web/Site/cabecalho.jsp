@@ -1,3 +1,5 @@
+<%@page import="modelo.Autor"%>
+<%@page import="dao.AutorDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.CategoriaDAO"%>
 <%@page import="modelo.Categoria"%>
@@ -6,6 +8,10 @@
     CategoriaDAO cdao = new CategoriaDAO();
     List<Categoria> clista = cdao.listar();
     cdao.fecharConexao();
+    
+    AutorDAO adao = new AutorDAO();
+    List<Autor> alista = adao.listar();
+    adao.fecharConexao();
 %>
 <html>
 	<head>
@@ -79,27 +85,28 @@
 							<ul>
 								<li class="active"><a href="index.jsp">Inicio</a></li>
 								<li class="has-dropdown">
-									<a href="shop.jsp">Categorias</a>
+									<a href="index.jsp">Categorias</a>
                                                                      
 									<ul class="dropdown">
                                                                                <% for(Categoria item: clista)
                                                                                               
                                                                         {
                                                                         %>
-                                                                            <li><a href="product-detail.jsp"><%=item.getNome()%></a></li>
+                                                                            <li><a href="index.jsp"><%=item.getNome()%></a></li>
 									<% }%>	
 									</ul>
                                                                         
 								</li>
                                                                 
 								<li class="has-dropdown active">
-									<a href="shop.html">Shop</a>
+									<a href="index.jsp">Autores</a>
 									<ul class="dropdown">
-										<li><a href="product-detail.html">Detalhes do Produto</a></li>
-										<li><a href="cart.html">Carrinho</a></li>
-										<li><a href="checkout.html">Checkout</a></li>
-										<li><a href="order-complete.html">Order Complete</a></li>
-										<li><a href="add-to-wishlist.html">Wishlist</a></li>
+                                                                            <% for(Autor item: alista)
+                                                                                              
+                                                                        {
+                                                                        %>
+										<li><a href="index.jsp"><%=item.getNome()%></a></li>
+										<% }%>	
 									</ul>
 								<li><a href="blog.html">Blog</a></li>
 								<li><a href="about.html">About</a></li>

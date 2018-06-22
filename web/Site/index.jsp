@@ -4,8 +4,21 @@
 <%@include file="cabecalho.jsp"%>
 <%
     LivroDAO dao = new LivroDAO();
-    List<Livro> lista = dao.listar();
+    List<Livro> lista;
+    
+    if(request.getParameter("categoriaid")!=null){
+        Integer id =
+                Integer.parseInt(request.getParameter("categoriaid"));
+        Categoria c = cdao.buscarPorChavePrimaria(id);
+        lista = c.getLivroList();
+    }
+    else{
+        lista = dao.listar();
+    }
+    
     dao.fecharConexao();
+    
+
 %>
 		
 		<div class="colorlib-shop">
@@ -35,7 +48,7 @@
 							</div>
 							<div class="desc">
 								<h3><a href="shop.html"><%=item.getNome()%></a></h3>
-								<p class="price"><span>$300.00</span></p>
+								<p class="price"><span><%=item.getPreco()%></span></p>
 							</div>
 						</div>
 					</div>
