@@ -7,6 +7,9 @@
     <class>modelo.Categoria</class>
     <class>modelo.Livro</class>
     <class>modelo.Editora</class>
+    <class>modelo.Compra</class>
+    <class>modelo.Cliente</class>
+    <class>modelo.CompraLivro</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/LivrariaNathi"/>

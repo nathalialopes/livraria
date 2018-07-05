@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,6 +46,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Livro.findByImagem3", query = "SELECT l FROM Livro l WHERE l.imagem3 = :imagem3"),
     @NamedQuery(name = "Livro.findBySinopse", query = "SELECT l FROM Livro l WHERE l.sinopse = :sinopse")})
 public class Livro implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "livro")
+    private List<CompraLivro> compraLivroList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -209,6 +214,15 @@ public class Livro implements Serializable {
     @Override
     public String toString() {
         return "modelo.Livro[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public List<CompraLivro> getCompraLivroList() {
+        return compraLivroList;
+    }
+
+    public void setCompraLivroList(List<CompraLivro> compraLivroList) {
+        this.compraLivroList = compraLivroList;
     }
     
 }
