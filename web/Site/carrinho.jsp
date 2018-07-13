@@ -1,4 +1,34 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="modelo.CompraLivro"%>
+<%@page import="modelo.Livro"%>
+<%@page import="dao.LivroDAO"%>
 <%@include file="cabecalho.jsp"%>
+
+<%
+    if(request.getParameter("id")==null){
+        response.sendRedirect("index.jsp");
+        return;
+    }
+    Integer id=Integer.parseInt(request.getParameter("id"));
+    LivroDAO dao = new LivroDAO();
+    Livro l = dao.buscarPorChavePrimaria(id);
+    List<CompraLivro> carrinho;
+    CompraLivro cl = new CompraLivro();
+    cl.setLivro(l);
+    cl.setValorunitario(l.getPreco()); 
+         
+    if(session.getAttribute("carrinho") !=null)
+    {
+        carrinho = (List<CompraLivro>)session.getAttribute("carrinho");
+        carrinho.add(cl);
+    }
+    else
+    {
+        carrinho = new ArrayList<CompraLivro>();
+        carrinho.add(cl);
+    }
+    session.setAttribute("carrinho", carrinho);
+%>
 
 		<aside id="colorlib-hero" class="breadcrumbs">
 			<div class="flexslider">
@@ -10,7 +40,7 @@
 				   			<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
 				   				<div class="slider-text-inner text-center">
 				   					<h1>Shopping Cart</h1>
-				   					<h2 class="bread"><span><a href="index.html">Home</a></span> <span><a href="shop.html">Product</a></span> <span>Shopping Cart</span></h2>
+				   					<h2 class="bread"><span><a href="index.jsp">Inicio</a></span> <span><a href="shop.html">Product</a></span> <span>Shopping Cart</span></h2>
 				   				</div>
 				   			</div>
 				   		</div>
@@ -44,32 +74,37 @@
 					<div class="col-md-10 col-md-offset-1">
 						<div class="product-name">
 							<div class="one-forth text-center">
-								<span>Product Details</span>
+								<span>Detalhes do Produto</span>
 							</div>
 							<div class="one-eight text-center">
-								<span>Price</span>
+								<span>Preço</span>
 							</div>
 							<div class="one-eight text-center">
-								<span>Quantity</span>
+								<span>Quantidade</span>
 							</div>
 							<div class="one-eight text-center">
 								<span>Total</span>
 							</div>
 							<div class="one-eight text-center">
-								<span>Remove</span>
+								<span>Remover</span>
 							</div>
 						</div>
+                                            <%for (CompraLivro obj : carrinho){
+                                                
+                                            %>
 						<div class="product-cart">
 							<div class="one-forth">
-								<div class="product-img" style="background-image: url(images/item-6.jpg);">
+								<div class="product-img" style="background-image: url(../arquivos/<%=obj.getLivro().getImagem1()%>);">
 								</div>
 								<div class="display-tc">
-									<h3>Product Name</h3>
+									<h3><%=obj.getLivro().getNome()%></h3>
 								</div>
 							</div>
 							<div class="one-eight text-center">
 								<div class="display-tc">
-									<span class="price">$68.00</span>
+									<span class="price">R$ 
+                                                                        <%=obj.getLivro().getPreco()%>
+                                                                        </span>
 								</div>
 							</div>
 							<div class="one-eight text-center">
@@ -79,7 +114,8 @@
 							</div>
 							<div class="one-eight text-center">
 								<div class="display-tc">
-									<span class="price">$120.00</span>
+									<span class="price">R$ 
+                                                                        <%=obj.getLivro().getPreco()%></span>
 								</div>
 							</div>
 							<div class="one-eight text-center">
@@ -88,65 +124,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="product-cart">
-							<div class="one-forth">
-								<div class="product-img" style="background-image: url(images/item-7.jpg);">
-								</div>
-								<div class="display-tc">
-									<h3>Product Name</h3>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$68.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<form action="#">
-										<input type="text" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-									</form>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$120.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<a href="#" class="closed"></a>
-								</div>
-							</div>
-						</div>
-						<div class="product-cart">
-							<div class="one-forth">
-								<div class="product-img" style="background-image: url(images/item-8.jpg);">
-								</div>
-								<div class="display-tc">
-									<h3>Product Name</h3>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$68.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="1" min="1" max="100">
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<span class="price">$120.00</span>
-								</div>
-							</div>
-							<div class="one-eight text-center">
-								<div class="display-tc">
-									<a href="#" class="closed"></a>
-								</div>
-							</div>
+                                                                <%
+                                                                 }
+                                                                %>
+						
+						
 						</div>
 					</div>
 				</div>
@@ -161,7 +143,7 @@
 												<input type="text" name="quantity" class="form-control input-number" placeholder="Your Coupon Number...">
 											</div>
 											<div class="col-md-3">
-												<input type="submit" value="Apply Coupon" class="btn btn-primary">
+												<input type="submit" value="Comprar" class="btn btn-primary">
 											</div>
 										</div>
 									</form>

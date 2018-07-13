@@ -101,7 +101,7 @@
                                  	</div>
                         			</div>
 										</div>
-										<p><a href="cart.html" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Adicionar ao Carrinho</a></p>
+                                                                                <p><a href="carrinho.jsp?id=<%=obj.getId()%>" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Adicionar ao Carrinho</a></p>
 									</div>
 								</div>
 							</div>
